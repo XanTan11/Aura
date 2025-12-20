@@ -1,20 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Aura</title>
-    <link rel="stylesheet" href="./style.css">
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AURA FC — Official</title>
+
+  <!-- твои пути -->
   <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
@@ -40,19 +31,20 @@
           Состав команды: тренеры, игроки и замены. Нажми на карточку — откроется фото и доп. инфа.
         </p>
 
+        <!-- ✅ добавил "Форма" -->
         <div class="hero__actions">
           <a class="btn" href="#coaches">Тренеры</a>
           <a class="btn" href="#players">Игроки</a>
           <a class="btn" href="#subs">Замены</a>
+          <a class="btn" href="#kits">Форма</a>
         </div>
       </div>
 
       <div class="hero__right">
-        <!-- ✅ ЛОГО БЕЗ ФОНА/РАМОК -->
         <img
           id="auraLogo"
           class="aura-logo"
-          src="https://i.postimg.cc/sx9VT2jT/Image-(7).png"
+          src="https://i.postimg.cc/kgNWmM23/5344059624543425303-1-removebg-preview.png"
           alt="AURA FC Logo"
         />
       </div>
@@ -140,15 +132,14 @@
           <button class="card__btn" type="button">Открыть</button>
         </article>
 
+        <!-- ✅ капитан (data-captain="true") -->
         <article class="card"
-  data-title="#11 — Ahmed Javadkhan (MF)"
-  data-role="Midfielder"
-  data-meta="Сильное: перехваты • контроль • пас"
-  data-extra="Опорник, закрывает зоны, помогает защите."
-  data-img="https://i.postimg.cc/2531xpst/Chat-GPT-Image-20-dek-2025-g-00-28-56-removebg-preview.png"
-  data-captain="true"
->
-
+          data-title="#11 — Ahmed Javadkhan (MF)"
+          data-role="Midfielder"
+          data-meta="Сильное: перехваты • контроль • пас"
+          data-extra="Опорник, закрывает зоны, помогает защите."
+          data-img="https://i.postimg.cc/2531xpst/Chat-GPT-Image-20-dek-2025-g-00-28-56-removebg-preview.png"
+          data-captain="true">
           <div class="card__top">
             <div class="avatar">AJ</div>
             <span class="tag">PLAYER</span>
@@ -248,6 +239,43 @@
     </div>
   </section>
 
+  <!-- ✅ KITS 25/26 -->
+  <section class="section" id="kits">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">Форма 25/26</h2>
+        <p class="section__desc">Домашняя и гостевая форма сезона 2025/2026.</p>
+      </div>
+
+      <div class="kits">
+        <div class="kits__group">
+          <h3 class="kits__title">Домашняя форма</h3>
+          <div class="kits__row">
+            <div class="kit-card">
+              <img src="https://i.postimg.cc/x1Mp4pB6/1000053406-removebg-preview.png" alt="Домашняя форма — футболка" />
+            </div>
+            <div class="kit-card">
+              <img src="https://i.postimg.cc/jqBG3fLL/1000053404-removebg-preview.png" alt="Домашняя форма — шорты" />
+            </div>
+          </div>
+        </div>
+
+        <div class="kits__group">
+          <h3 class="kits__title">Гостевая форма</h3>
+          <div class="kits__row">
+            <div class="kit-card">
+              <img src="https://i.postimg.cc/SN7DLY9T/1766252242684.png" alt="Гостевая форма — футболка" />
+            </div>
+            <div class="kit-card">
+              <img src="https://i.postimg.cc/SQcrqYgf/1766252321205.png" alt="Гостевая форма — шорты" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container footer__inner">
       <div>© AURA FC</div>
@@ -284,9 +312,4 @@
 
 <script src="js/site.js"></script>
 </body>
-</html>
-    <script  src="./script.js"></script>
-
-  </body>
-  
 </html>
