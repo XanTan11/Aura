@@ -782,3 +782,42 @@ html{
 
   color: rgba(233,236,255,.75);
 }
+
+/* ===== LAST MATCH HEADER (VOLUME / CARD STYLE) ===== */
+.match-head{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.match-head__title{
+  padding: 9px 20px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .9px;
+  text-transform: uppercase;
+
+  color: var(--text);
+
+  background: linear-gradient(
+    180deg,
+    rgba(24,30,80,.95),
+    rgba(10,14,45,.95)
+  );
+
+  border: 1px solid var(--line);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 10px 32px rgba(0,0,0,.45);
+}
+
+.match-head__desc{
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: .3px;
+}
