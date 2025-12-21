@@ -1,45 +1,61 @@
-// ===== Logo animation (гарантированный запуск) =====
+// =======================
+// LOGO ANIMATION (always)
+// =======================
 window.addEventListener("load", () => {
   const logo = document.getElementById("auraLogo");
-  if (!logo) return;
-  setTimeout(() => logo.classList.add("is-on"), 120);
+  if (logo) setTimeout(() => logo.classList.add("is-on"), 120);
+
+  // после загрузки — включаем reveal
+  initReveal();
 });
 
-// ===== Smooth scroll =====
+// =======================
+// SMOOTH SCROLL WITH OFFSET (mobile safe)
+// =======================
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener("click", (e) => {
     const id = a.getAttribute("href");
     const el = document.querySelector(id);
     if (!el) return;
+
     e.preventDefault();
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    const header = document.querySelector(".header");
+    const headerH = header ? header.getBoundingClientRect().height : 0;
+    const extra = 14; // запас, чтобы не было "впритык"
+
+    const y = el.getBoundingClientRect().top + window.pageYOffset - headerH - extra;
+
+    window.scrollTo({
+      top: Math.max(0, y),
+      behavior: "smooth"
+    });
   });
 });
 
-// ===== Modal logic =====
+// =======================
+// MODAL LOGIC
+// =======================
 const modal = document.getElementById("modal");
 const mTitle = document.getElementById("mTitle");
-const mRole = document.getElementById("mRole");
-const mMeta = document.getElementById("mMeta");
+const mRole  = document.getElementById("mRole");
+const mMeta  = document.getElementById("mMeta");
 const mExtra = document.getElementById("mExtra");
-const mImg = document.getElementById("mImg");
+const mImg   = document.getElementById("mImg");
 const mImgWrap = document.getElementById("mImgWrap");
 
 function openModal(card){
-  const title = card.dataset.title || "AURA FC";
-  const role = card.dataset.role || "";
-  const meta = card.dataset.meta || "";
-  const extra = card.dataset.extra || "";
+  if (!modal) return;
+
+  mTitle.textContent = card.dataset.title || "AURA FC";
+  mRole.textContent  = card.dataset.role  || "";
+  mMeta.textContent  = card.dataset.meta  || "";
+  mExtra.textContent = card.dataset.extra || "";
+
   const img = card.dataset.img || "";
-
-  mTitle.textContent = title;
-  mRole.textContent = role;
-  mMeta.textContent = meta;
-  mExtra.textContent = extra;
-
   if (img) {
     mImg.src = img;
-    mImgWrap.style.display = "block";
+    mImgWrap.style.display = "grid";
   } else {
     mImg.removeAttribute("src");
     mImgWrap.style.display = "none";
@@ -51,6 +67,7 @@ function openModal(card){
 }
 
 function closeModal(){
+  if (!modal) return;
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
@@ -60,19 +77,43 @@ document.querySelectorAll(".card").forEach(card => {
   card.addEventListener("click", () => openModal(card));
 });
 
-modal.addEventListener("click", (e) => {
-  const t = e.target;
-  if (t?.dataset?.close === "true") closeModal();
-});
+if (modal) {
+  modal.addEventListener("click", (e) => {
+    const t = e.target;
+    if (t?.dataset?.close === "true") closeModal();
+  });
+}
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  if (e.key === "Escape" && modal?.classList.contains("is-open")) closeModal();
 });
 
-// =========================
-// AUTO SCROLL REVEAL
-// no HTML edits needed
-// =========================
+// =======================
+// REVEAL ON SCROLL (IntersectionObserver)
+// =======================
+function initReveal(){
+  // Добавляем .reveal автоматически к нужным блокам
+  document.querySelectorAll(
+    ".section, .hero__left, .hero__right, .grid, .match-card, .kits, .kits__group"
+  ).forEach(el => el.classList.add("reveal"));
 
-const autoRevealTargets = document.querySelectorAll(
-  ".section, .card, .match-card, .kit-card"
+  const items = document.querySelectorAll(".reveal");
+  if (!items.length) return;
+
+  // если браузер древний — просто показываем
+  if (!("IntersectionObserver" in window)) {
+    items.forEach(el => el.classList.add("is-visible"));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  items.forEach(el => io.observe(el));
+}
