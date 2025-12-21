@@ -68,3 +68,11 @@ modal.addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
 });
+
+// =========================
+// AUTO SCROLL REVEAL
+// no HTML edits needed
+// =========================
+
+const autoRevealTargets = document.querySelectorAll(
+  ".section, .card, .match-card, .kit-card"
