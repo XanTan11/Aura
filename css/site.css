@@ -989,3 +989,29 @@ html{
   line-height: 1.55;
 }
 
+/* =========================
+   PAGE REVEAL ON SCROLL
+   ========================= */
+
+/* всё, что ниже первого экрана */
+.page-reveal{
+  opacity: 0;
+  transform: translateY(60px);
+  transition:
+    opacity .9s ease,
+    transform .9s ease;
+}
+
+/* когда проявилось */
+.page-reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* мягче на телефоне */
+@media (max-width: 620px){
+  .page-reveal{
+    transform: translateY(40px);
+    transition-duration: .7s;
+  }
+}
