@@ -989,26 +989,3 @@ html{
   line-height: 1.55;
 }
 
-/* =========================
-   SCROLL REVEAL ANIMATION
-   ========================= */
-
-/* reval/reveal — класс будет .reveal */
-.reveal{
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .55s ease, transform .55s ease;
-  will-change: opacity, transform;
-}
-
-.reveal.is-visible{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* на мобилке чуть быстрее/мягче */
-@media (max-width: 620px){
-  .reveal{
-    transition: opacity .45s ease, transform .45s ease;
-  }
-}
