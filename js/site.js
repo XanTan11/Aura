@@ -117,3 +117,32 @@ function initReveal(){
 
   items.forEach(el => io.observe(el));
 }
+
+// =========================
+// PAGE BOTTOM REVEAL
+// =========================
+
+document.addEventListener("DOMContentLoaded", () => {
+  // всё, что ниже hero — считаем "нижней частью"
+  const bottomContent = document.querySelector("main");
+
+  if (!bottomContent) return;
+
+  bottomContent.classList.add("page-reveal");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.disconnect(); // один раз
+        }
+      });
+    },
+    {
+      threshold: 0.15
+    }
+  );
+
+  observer.observe(bottomContent);
+});
