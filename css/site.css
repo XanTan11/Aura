@@ -953,3 +953,30 @@ html{
     margin-bottom: 16px;
   }
 }
+
+/* =========================
+   AUTO SCROLL REVEAL
+   (NO HTML CHANGES)
+   ========================= */
+
+[data-auto-reveal]{
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
+  will-change: opacity, transform;
+}
+
+[data-auto-reveal].is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* на телефоне мягче */
+@media (max-width: 620px){
+  [data-auto-reveal]{
+    transform: translateY(28px);
+    transition-duration: .6s;
+  }
+}
