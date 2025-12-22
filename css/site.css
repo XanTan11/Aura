@@ -945,3 +945,53 @@ main, .page, .container, .wrap {
   .header{ transition: none; }
 }
 
+/* =========================================================
+   MOBILE WHITE STRIP FIX (не ломает якоря)
+   Причина белой полосы: iOS/мобилки + fixed background + bounce.
+========================================================= */
+html{
+  background: #050816;                 /* чтобы при bounce не было белого */
+  height: 100%;
+}
+
+body{
+  background-color: #050816;           /* подстраховка */
+  min-height: 100svh;                  /* правильная высота на мобилках */
+  overflow-x: hidden;
+}
+
+/* iOS Safari fallback */
+@supports (-webkit-touch-callout: none){
+  html{ height: -webkit-fill-available; }
+  body{ min-height: -webkit-fill-available; }
+}
+
+/* ВАЖНО: на телефоне НЕ используем fixed, иначе появляются полосы/рывки */
+@media (max-width: 720px){
+  body{ background-attachment: scroll !important; }
+}
+
+/* =========================================================
+   SMOOTH HEADER HIDE (плавно, без смещения вправо)
+   НЕ трогаем left/top/width — только добавляем анимацию.
+========================================================= */
+.header{
+  transition: transform .35s ease, opacity .25s ease, filter .35s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateX(-50%) translateY(0);  /* сохраняем центр как было */
+}
+
+/* состояние "спрятан" */
+.header.is-hidden{
+  transform: translateX(-50%) translateY(-140%);
+  opacity: 0;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Если пользователь отключил анимации */
+@media (prefers-reduced-motion: reduce){
+  .header{ transition: none; }
+}
+
