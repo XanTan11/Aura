@@ -978,17 +978,3 @@ main, .page, .container, .wrap {
   }
 }
 
-/* === MOBILE FIX: white bar + overflow === */
-html, body {
-  height: 100%;
-  background: #050a1a;          /* чтобы НИГДЕ не просвечивал белый */
-  overflow-x: hidden;            /* режем вылезание вправо */
-}
-
-body {
-  min-height: 100dvh;            /* правильная высота на мобилках */
-}
-
-@supports not (height: 100dvh) {
-  body { min-height: 100vh; }    /* fallback */
-}
