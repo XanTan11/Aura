@@ -74,17 +74,34 @@ body{
 }
 
 /* Header */
-.header{
-  position:fixed;
-  top:12px; left:50%;
-  transform:translateX(-50%);
-  width:min(1150px, 92vw);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:10px 12px;
+.header {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  /* Важно: всегда держим translateX(-50%), чтобы был центр */
+  transform: translateX(-50%) translateY(0); 
+  width: min(1150px, 92vw);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
   border-radius: calc(var(--r) + 8px);
-  z-index:50;
+  z-index: 9999;
+  
+  /* Плавность */
+  transition: transform .35s ease, opacity .25s ease, backdrop-filter .35s ease;
+  box-sizing: border-box;
+  will-change: transform;
+}
+
+/* Состояние, когда шапка прячется при скролле */
+.header.is-hidden {
+  /* Мы сохраняем -50% по X, чтобы она не прыгала влево/вправо */
+  transform: translateX(-50%) translateY(-140%);
+  opacity: 0;
+  pointer-events: none;
+}
+
 }
 
 .brand{
